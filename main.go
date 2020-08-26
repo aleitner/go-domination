@@ -83,8 +83,13 @@ func main() {
 	}
 
 	go func(){
-		<-game.alarm.ring
-		game.screen = end
+		for {
+			select {
+			case <-game.alarm.ring:
+				game.screen = end
+			default:
+			}
+		}
 	}()
 
 	// Sepcify the window size as you like. Here, a doulbed size is specified.
